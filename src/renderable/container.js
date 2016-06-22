@@ -150,6 +150,12 @@
             child.ancestor = this;
             this.children.push(child);
 
+            // only insert object with a bounding box to the quadtree
+            if (typeof (child.getBounds) === "function") {
+                me.collision.quadTree.insert(child);
+            }
+
+
             // set the child z value if required
             if (typeof(child.pos) !== "undefined") {
                 if (typeof(z) === "number") {
@@ -196,6 +202,11 @@
                 child.ancestor = this;
 
                 this.children.splice(index, 0, child);
+
+                // only insert object with a bounding box to the quadtree
+                if (typeof (child.getBounds) === "function") {
+                    me.collision.quadTree.insert(child);
+                }
 
                 if (typeof child.onActivateEvent === "function" && this.isAttachedToRoot()) {
                     child.onActivateEvent();

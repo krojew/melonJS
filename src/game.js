@@ -190,11 +190,14 @@
          */
         api.reset = function () {
 
-            // clear the quadtree
-            me.collision.quadTree.clear();
-
             // remove all objects
             api.world.destroy();
+
+            // make sure the quadtre is clear
+            me.collision.quadTree.clear();
+
+            // insert back the world container
+            me.collision.quadTree.insertContainer(api.world);
 
             // reset the viewport to zero ?
             if (api.viewport) {
@@ -289,9 +292,6 @@
 
                 while (accumulator >= accumulatorUpdateDelta || me.sys.interpolation) {
                     lastUpdateStart = window.performance.now();
-
-                    // insert the world container (children) into the quadtree
-                    me.collision.quadTree.insertContainer(api.world);
 
                     // update all objects (and pass the elapsed time since last frame)
                     isDirty = api.world.update(updateDelta) || isDirty;
