@@ -506,7 +506,6 @@
                     if (typeof (child.destroy) === "function") {
                         child.destroy();
                     }
-
                     me.pool.push(child);
                 }
 
@@ -517,6 +516,9 @@
                     this.children.splice(childIndex, 1);
                     child.ancestor = undefined;
                 }
+
+                // remove the item from the quadtree
+                me.collision.quadTree.remove(child);
             }
         },
 

@@ -290,9 +290,6 @@
                 while (accumulator >= accumulatorUpdateDelta || me.sys.interpolation) {
                     lastUpdateStart = window.performance.now();
 
-                    // clear the quadtree
-                    me.collision.quadTree.clear();
-
                     // insert the world container (children) into the quadtree
                     me.collision.quadTree.insertContainer(api.world);
 
