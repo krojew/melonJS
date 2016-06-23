@@ -302,12 +302,11 @@
             var index = this.getIndex(item);
 
             if (index !== -1) {
-                this.nodes[index].remove(item);
+                found = this.nodes[index].remove(item);
                 // trim node if empty
-                if (this.nodes[index].isPrunable()) {
-                    this.nodes[index].clear();
+                if (found && this.nodes[index].isPrunable()) {
+                    this.nodes.splice(index, 1);
                 }
-                found = true;
             }
         }
 
@@ -342,7 +341,8 @@
      */
     Quadtree.prototype.hasChildren = function () {
         for (var i = 0; i < this.nodes.length; i = i + 1) {
-            if (this.nodes[i].length > 0) {
+            var subnode = this.nodes[i];
+            if (subnode.length > 0 || subnode.objects.length > 0) {
                 return true;
             }
         }
