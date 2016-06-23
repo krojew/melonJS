@@ -151,8 +151,12 @@
             this.children.push(child);
 
             // only insert object with a bounding box to the quadtree
-            if (typeof (child.getBounds) === "function") {
-                me.collision.quadTree.insert(child);
+            if (this.isAttachedToRoot() && typeof (child.getBounds) === "function") {
+                if (child instanceof me.Container) {
+                    me.collision.quadTree.insertContainer(child);
+                } else {
+                    me.collision.quadTree.insert(child);
+                }
             }
 
 
@@ -204,8 +208,12 @@
                 this.children.splice(index, 0, child);
 
                 // only insert object with a bounding box to the quadtree
-                if (typeof (child.getBounds) === "function") {
-                    me.collision.quadTree.insert(child);
+                if (this.isAttachedToRoot() && typeof (child.getBounds) === "function") {
+                    if (child instanceof me.Container) {
+                        me.collision.quadTree.insertContainer(child);
+                    } else {
+                        me.collision.quadTree.insert(child);
+                    }
                 }
 
                 if (typeof child.onActivateEvent === "function" && this.isAttachedToRoot()) {

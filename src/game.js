@@ -161,8 +161,12 @@
                 api.world.name = "rootContainer";
                 api.world._root = true;
 
+
                 // initialize the collision system (the quadTree mostly)
                 me.collision.init();
+
+                // insert the world container
+                me.collision.quadTree.insertContainer(api.world);
 
                 renderer = me.video.renderer;
 

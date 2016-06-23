@@ -314,6 +314,8 @@
                 api.bounds = me.game.world.clone();
                 // reset the quadtree
                 api.quadTree.clear(api.bounds);
+                // add the re-populated game world
+                api.quadTree.insertContainer(me.game.world);
             });
         };
 
